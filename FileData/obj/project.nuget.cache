@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "qBNxJPP15TrsUI3X+5/UvHHZy7wwpW3EmX8d7/LDy8kUgrw0iH7tb5jBTL5/O7EqyP2yYyRz0yyJzN5K3imFOA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\popca\\RiderProjects\\RedditLike-master\\FileData\\FileData.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\popca\\.nuget\\packages\\microsoft.aspnetcore.authorization\\7.0.4\\microsoft.aspnetcore.authorization.7.0.4.nupkg.sha512",
+    "C:\\Users\\popca\\.nuget\\packages\\microsoft.aspnetcore.metadata\\7.0.4\\microsoft.aspnetcore.metadata.7.0.4.nupkg.sha512",
+    "C:\\Users\\popca\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\7.0.0\\microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\popca\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\7.0.0\\microsoft.extensions.logging.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\popca\\.nuget\\packages\\microsoft.extensions.options\\7.0.1\\microsoft.extensions.options.7.0.1.nupkg.sha512",
+    "C:\\Users\\popca\\.nuget\\packages\\microsoft.extensions.primitives\\7.0.0\\microsoft.extensions.primitives.7.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

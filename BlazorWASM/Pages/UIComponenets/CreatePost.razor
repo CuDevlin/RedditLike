@@ -1,0 +1,117 @@
+﻿@page "/CreatePost"
+@attribute [Authorize]
+@using HttpClients.ClientInterfaces
+@using global::Shared.Models
+@using global::Shared.DTOs
+@using global::Shared.Dtos
+@using BlazorWASM.Services
+@inject IUserService userService
+@inject IPostService todoService
+@inject NavigationManager navMgr
+<h3>Create Post</h3>
+
+<div class="card1">
+    @if (users == null)
+    {
+        <label>Loading users...</label>
+    }
+    else if (!users.Any())
+    {
+        <label>No users, you cannot create a Post without assignee.</label>
+    }
+    else
+    {
+        <div class="form-group field">
+            <label>Title:</label>
+            <input type="text" rows="1" cols="50" @bind="postTitle"/>
+        </div>
+        <div class="form-group field">
+            <label>Text:</label>
+             <textarea rows="4" cols="50" @bind="body"/>
+        </div>
+        <div class="form-group field">
+            <label>Assignee:</label>
+            <input type="text" rows="1" cols="50" @bind="selectedUser"/>
+        </div>
+        
+        <div class="button-row">
+            @if (!string.IsNullOrEmpty(msg))
+            {
+                <label style="color: red">@msg</label>
+            }
+            <button @onclick="Create" class="acceptbtn">Create</button>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+    private IEnumerable<User>? users;
+    private User user1;
+    private UserLoginDto loginDto= null!;
+    private PostCreationDto dto = null!;
+        //<input type="text" @bind="selectedUserId"/>
+    private int? selectedUser;
+    private string postTitle = "";
+    private string body = "";
+
+    private string msg = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        msg = "";
+        try
+        {
+            
+            users = await userService.GetUsers();
+            //user1 = await userService.GetUserById(Id);
+            //User toAssign = users.First(user => user.UserName.Equals(user1.UserName));
+
+            /*dto = new(Id, postTitle, body)
+            {
+                OwnerId = toAssign.Id
+            };*/
+    //selectedUserId = await userService.GetUserById(Id);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            msg = e.Message;
+        }
+    }
+
+    private async Task Create()
+    {
+        msg = "";
+        if (selectedUser == null)
+        {
+            msg = "You must select an assignee!";
+            return;
+        }
+        if (string.IsNullOrEmpty(postTitle))
+        {
+            msg = "Title cannot be empty!";
+            return;
+        }
+        if (string.IsNullOrEmpty(body))
+        {
+            msg = "Body cannot be empty!";
+            return;
+        }
+
+        try
+        {
+            PostCreationDto dto = new((int)selectedUser, postTitle, body);
+            await todoService.CreateAsync(dto);
+            navMgr.NavigateTo("/Logged");
+            msg = "Post created successfully";
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            msg = e.Message;
+        }
+    }
+    
+}
